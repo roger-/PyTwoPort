@@ -22,21 +22,25 @@ Usage
 =========
 
 A two-port network can be initialized using `TwoPort(f=f, <type>=<matrix>)` where `<type>` is one of the supported
-network types (z, y, s, etc.), `<matrix>` is a numpy array and `f` is a numpy array of frequencies (in which case
+network types (`z`, `y`, `s`, etc.), `<matrix>` is a numpy array and `f` is a numpy array of frequencies (in which case
 `<matrix>` should be 3D with a matrix corresponding to each frequency point). The `load_snp(file_name)` can also be
 used to import data from a S1P/S2P file.
 
-If you want to build a network from scratch using lumped elements, then you can create
-combine inductors, capacitors, resistors, etc. in series and parallel like this:
+If you want to build a network from scratch using lumped elements, then you can combine inductors, capacitors,
+resistors, etc. in series and parallel like this:
 
 ```python
 f = linspace(100e6, 1000e6) # need to define frequency points for some devices
 
-network = Series(Inductor(100e-9, f=f) // Capacitor(100e-12, f=f)) + Shunt(Resistor(50))
+network = Series(Inductor(100e-9, f=f) // \
+                 Capacitor(100e-12, f=f)) + \
+          Shunt(Resistor(50))
 ```
 
-A few more elements/networks (transformers, transmission lines, etc.) are defined in networks.py. The two-port
-parameters are now available in any format, e.g.:
+where `Series()` converts a one-port to a two-port and `+` combines two one-ports in series (similar for `Shunt()` and `//`). More
+elements/networks (transformers, transmission lines, etc.) are defined in networks.py.
+
+The two-port parameters are now available in any format, e.g.:
 
 ```python
 print network.z[_11] # _11 is a helper so we can avoid indexing with z[:, 0, 0]
@@ -64,11 +68,11 @@ Here the opposite port remains open circuited.
 Other things you can do with a two-port network include calculating gains, stability factors, etc.
 
 ```python
-terminator = Resistor(150) # this is out source/load termination
+terminator = Resistor(150) # this is our source/load termination
 
 print network.transducer_gain(terminator, terminator) # gain with this termination
 print network.s[_21] # this would be the gain into 50 Ohm loads
-print network.rollett_k() # stability factor (< one implies potential instability)
+print network.rollett_k() # stability factor (< 1.0 implies potential instability)
 ```
 
 Sample plots
