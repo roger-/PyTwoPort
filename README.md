@@ -29,6 +29,12 @@ A few sample plots (see test.py for the code):
 ![image](http://i.imgur.com/z4I0RfC.png)
 * Gain surface and instability regions.
 ![image](http://i.imgur.com/NVDWINe.png)
+* Gains vs. frequency
+![image](http://i.imgur.com/xw9HkZ5.png)
+* Reflection coefficient on Smith chart
+![image](http://i.imgur.com/Oh4HyTW.png)
+* Stability factors vs. frequency
+![image](http://i.imgur.com/LwxYfIt.png)
 
 License
 =========

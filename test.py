@@ -48,6 +48,8 @@ def amplifier():
     pyl.figure()
     pyl.plot(f/1e6, kt, label='EL Tan\'s modified Rollett $k$')
     pyl.plot(f/1e6, mu, label='$\mu_i$')
+    pyl.xlabel('Frequency (MHz)')
+    pyl.ylabel('Stability factor')
     pyl.axhline(1.0, color='black') # line at stability limit
     pyl.legend(loc='lower right')
 
