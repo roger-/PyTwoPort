@@ -32,13 +32,12 @@ resistors, etc. in series and parallel like this:
 ```python
 f = linspace(100e6, 1000e6) # need to define frequency points for some devices
 
-network = Series(Inductor(100e-9, f=f) // \
-                 Capacitor(100e-12, f=f)) + \
-          Shunt(Resistor(50))
+network = (Inductor(100e-9, f=f) // Capacitor(100e-12, f=f)).to_series() *  Resistor(50).to_shunt()
 ```
 
-where `Series()` converts a one-port to a two-port and `+` combines two one-ports in series (similar for `Shunt()` and `//`). More
-elements/networks (transformers, transmission lines, etc.) are defined in networks.py.
+where `to_series()` converts a one-port to a series connected two-port (similarly for `to_shunt()`),
+`*` combines two one-ports in cascade  and `//` two networks in parallel (`+` for series).
+Additional elements/networks (transformers, transmission lines, etc.) are defined in networks.py.
 
 The two-port parameters are now available in any format, e.g.:
 

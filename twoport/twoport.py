@@ -205,6 +205,22 @@ class OnePort(NPort):
     def parallel_equiv(self):
         return 1/real(self.y), -1j/imag(self.y)
 
+    def to_shunt(self):
+        '''
+        Convert one-port to shunt connected two-port
+        '''
+        from networks import Shunt
+
+        return Shunt(self)
+
+    def to_series(self):
+        '''
+        Convert one-port to series connected two-port
+        '''
+        from networks import Series
+
+        return Series(self)
+
     def __repr__(self):
         desc = self.description if self.description else 'One-port network'
 
