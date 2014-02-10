@@ -18,6 +18,14 @@ Features
 * Smith chart plotting, with interactive data cursors.
 * Gain and stability circle plotting on Smith charts.
 
+Dependencies
+=========
+
+* Python 2.7
+* NumPy
+* SciPy (used just for interpolation)
+* Matplotlib (for plotting)
+
 Usage
 =========
 
