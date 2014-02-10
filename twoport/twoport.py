@@ -8,7 +8,7 @@ from scipy import interpolate
 from utils import *
 
 __all__ = ['OnePort', 'TwoPort',
-           '_11', '_12', '_21', '_22', 'db', 'un_db', 'plot_gains']
+           '_11', '_12', '_21', '_22', 'plot_gains']
 
 # 2x2 identity matrix (for convenience)
 I = identity(2, dtype='complex')

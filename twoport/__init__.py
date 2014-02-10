@@ -15,10 +15,11 @@
 #    along with pyrlsdr.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from networks import OnePort, TwoPort, plot_gains
+from twoport import *
 from s2p import load_snp
 from smithplot import SmithChart
 import networks
 import utils
 
-__all__  = ['OnePort', 'TwoPort', 'plot_gains', 'load_snp', 'SmithChart', 'networks', 'utils']
+__all__  = ['OnePort', 'TwoPort', 'plot_gains', 'load_snp', 'SmithChart', \
+            'networks', 'utils', '_11', '_12', '_21', '_22']

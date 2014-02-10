@@ -9,7 +9,7 @@ Features
 =========
 
 * Support for one- and two-port networks (N-port functionality can be added at some point).
-* Conversion between Z, Y, S and ABC parameters, including spline based interpolation of new frequency points.
+* Conversion between Z, Y, S, T and ABCD parameters, including spline based interpolation of new frequency points.
 * Combine networks in parallel, series or cascade.
 * Convert one-port networks to parallel or series two-port networks, and one-port networks to driving point one-port networks.
 * Functions for calculating various gains (tranducer gain, maximum stable gain, etc.)
@@ -18,7 +18,60 @@ Features
 * Smith chart plotting, with interactive data cursors.
 * Gain and stability circle plotting on Smith charts.
 
-Samples
+Usage
+=========
+
+A two-port network can be initialized using `TwoPort(f=f, <type>=<matrix>)` where `<type>` is one of the supported
+network types (z, y, s, etc.), `<matrix>` is a numpy array and `f` is a numpy array of frequencies (in which case
+`<matrix>` should be 3D with a matrix corresponding to each frequency point). The `load_snp(file_name)` can also be
+used to import data from a S1P/S2P file.
+
+If you want to build a network from scratch using lumped elements, then you can create
+combine inductors, capacitors, resistors, etc. in series and parallel like this:
+
+```python
+f = linspace(100e6, 1000e6) # need to define frequency points for some devices
+
+network = Series(Inductor(100e-9, f=f) // Capacitor(100e-12, f=f)) + Shunt(Resistor(50))
+```
+
+A few more elements/networks (transformers, transmission lines, etc.) are defined in networks.py. The two-port
+parameters are now available in any format, e.g.:
+
+```python
+print network.z[_11] # _11 is a helper so we can avoid indexing with z[:, 0, 0]
+print network.s[_21]
+print network[500e6].y # returns matrix for f=500 MHz
+```
+
+If a network is only defined at a few frequency points, PyTwoPort can automatically interpolate new points using:
+
+```python
+network = network[400e6:450e6:5e6] # gives 5 MHz resolution
+```
+
+Note that the first and second indices can be omitted. Interpolation is done with SciPy's 1D spline function.
+
+Two port networks can also be reduced to equivalent input or output (driving point) one-port networks:
+
+```python
+print network.input_equiv()
+print network.output_equiv()
+```
+
+Here the opposite port remains open circuited.
+
+Other things you can do with a two-port network include calculating gains, stability factors, etc.
+
+```python
+terminator = Resistor(150) # this is out source/load termination
+
+print network.transducer_gain(terminator, terminator) # gain with this termination
+print network.s[_21] # this would be the gain into 50 Ohm loads
+print network.rollett_k() # stability factor (< one implies potential instability)
+```
+
+Sample plots
 =========
 
 A few sample plots (see test.py for the code):
