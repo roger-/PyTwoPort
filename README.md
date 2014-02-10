@@ -25,7 +25,7 @@ A few sample plots (see test.py for the code):
 
 * Instability regions for source and load termination for an active two-port network.
 ![image](http://i.imgur.com/4Jduvhq.png)
-* Instability regions for different frequency, and minimum a gain circle.
+* Instability regions for different frequency, and a minimum gain circle.
 ![image](http://i.imgur.com/z4I0RfC.png)
 * Gain surface and instability regions.
 ![image](http://i.imgur.com/NVDWINe.png)
