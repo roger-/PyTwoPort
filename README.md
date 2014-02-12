@@ -96,8 +96,10 @@ A few sample plots (see test.py for the code):
 ![image](http://i.imgur.com/4Jduvhq.png)
 * Instability regions for different frequency, and a minimum gain circle.
 ![image](http://i.imgur.com/z4I0RfC.png)
-* Gain surface and instability regions.
+* Gain surface and instability regions (red -> unstable).
 ![image](http://i.imgur.com/NVDWINe.png)
+* Gain surface and instability regions (green -> stable).
+![image](http://i.imgur.com/BYHQPQs.png)
 * Gains vs. frequency
 ![image](http://i.imgur.com/xw9HkZ5.png)
 * Reflection coefficient on Smith chart
